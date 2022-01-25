@@ -1,4 +1,4 @@
-import data from "./data.json";
+import data from "./MOCK_DATA.json";
 import React, { useState } from "react";
 import toLowerCase from "lodash/toLower";
 import UserCard from "./UserCard";
@@ -36,7 +36,7 @@ function App() {
         value={input}
         onChange={handleFilter}
       />
-      {userData.map((user) => {
+      {userData.slice(0, 10).map((user) => {
         return (
           <div
             id={user.id}
