@@ -1,8 +1,9 @@
 import data from "./MOCK_DATA.json";
 import React, { useState } from "react";
 import toLowerCase from "lodash/toLower";
-import UserCard from "./UserCard";
-import { Card } from "react-bootstrap";
+import Search from "./Search";
+import UserDetails from "./UserDetails";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   const [input, setInput] = useState("");
@@ -27,33 +28,14 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1 className="text-center">Search</h1>
-      <input
-        type="text"
-        style={{ maxWidth: "456px" }}
-        className="form-control mx-auto my-3"
-        value={input}
-        onChange={handleFilter}
-      />
-      {userData.slice(0, 10).map((user) => {
-        return (
-          <div
-            id={user.id}
-            key={user.id}
-            style={{ maxWidth: "456px" }}
-            className="mx-auto d-flex justify-content-between"
-          >
-            <UserCard
-              fName={user.first_name}
-              lName={user.last_name}
-              eMail={user.email}
-              id={user.id}
-            />
-          </div>
-        );
-      })}
-    </div>
+    <Router>
+      <div className="App container">
+        <Routes>
+          <Route exact path="/" element={<Search />} />
+          <Route path="/user/:id" element={<UserDetails />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
